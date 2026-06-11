@@ -1,117 +1,38 @@
-# Calculadora de IMC via CLI
+#  Calculadora de IMC via CLI
 
-## Descrição
+##  1. Descrição
 
 Projeto desenvolvido para a disciplina de Programação Orientada a Objetos.
 
-O sistema calcula o Índice de Massa Corporal (IMC) de pessoas e atletas através de uma interface de linha de comando (CLI), aplicando os principais conceitos de Programação Orientada a Objetos em Java.
+O sistema calcula o Índice de Massa Corporal (IMC) de pessoas e atletas através de uma interface de linha de comando (CLI), aplicando conceitos fundamentais de Programação Orientada a Objetos como herança, polimorfismo, encapsulamento, composição e recursão.
 
 ---
 
-## Tecnologias Utilizadas
+##  2. Pré-requisitos
 
-* Java 17
-* Maven
-* Programação Orientada a Objetos (POO)
-* Interface de Linha de Comando (CLI)
+Para executar o projeto, é necessário:
 
----
-
-## Funcionalidades
-
-* Cadastro de Pessoa
-* Cadastro de Atleta
-* Cálculo de IMC
-* Classificação do IMC
-* Histórico de cálculos realizados
-* Tratamento de entradas inválidas
-* Menu interativo via terminal
+- Java JDK 17 ou superior instalado
+- Terminal (CMD, PowerShell ou VS Code Terminal)
 
 ---
 
-## Conceitos de POO Aplicados
+##  3. Como Compilar
 
-### Interface
-
-* `CalculadoraIMC`
-
-Define os contratos para cálculo e classificação do IMC.
-
-### Classe Abstrata
-
-* `PessoaBase`
-
-Serve como base para as demais classes do sistema.
-
-### Encapsulamento
-
-* Atributos privados com métodos getters e setters.
-
-### Herança
-
-* `Pessoa` herda de `PessoaBase`
-* `Atleta` herda de `Pessoa`
-
-### Polimorfismo
-
-* Sobrescrita do método `classificarIMC()` na classe `Atleta`.
-
-### Composição
-
-* `SistemaIMC` possui um objeto `Historico`.
-
-### Recursão
-
-* Classe `CalculadoraRecursiva` utilizada para calcular potência.
-
-### Tratamento de Exceções
-
-* Exceção personalizada `EntradaInvalidaException`.
-
----
-
-## Estrutura do Projeto
-
-```text
-src/main/java
-
-Atleta.java
-CalculadoraIMC.java
-CalculadoraRecursiva.java
-EntradaInvalidaException
-Historico.java
-Main.java
-Pessoa.java
-PessoaBase.java
-SistemaIMC.java
-
-```
-
----
-
-## Como Compilar
-
-No terminal, execute:
+Dentro da pasta raiz do projeto, execute:
 
 ```bash
-mvn compile
-```
+javac -d out src/main/java/*.java
 
----
 
-## Como Executar
+4. Como Executar
 
-Execute a aplicação pela IDE ou utilizando Maven:
+Após compilar, execute o sistema com: java -cp out Main
 
-```bash
-mvn exec:java -Dexec.mainClass="Main"
-```
+5. Demonstração de Uso
 
----
+Ao iniciar o sistema, será exibido o menu:
 
-## Exemplo de Uso
-
-```text
 ===== CALCULADORA IMC =====
 
 1 - Cadastrar Pessoa
@@ -121,26 +42,25 @@ mvn exec:java -Dexec.mainClass="Main"
 0 - Sair
 
 Escolha uma opção:
-```
-
-### Exemplo de Resultado
-
-```text
+Exemplo de saída:
 Nome: Michelle
 Idade: 30
 Peso: 70
 Altura: 1.70
 
 Michelle → IMC: 24.22 (Peso normal)
-```
 
----
 
-## Dependências
+📁 6. Estrutura do Projeto
+src/main/java/
 
-* JUnit Jupiter 5.10.2
-
-Gerenciada pelo Maven através do arquivo `pom.xml`.
-
----
+├── Atleta.java
+├── CalculadoraIMC.java
+├── CalculadoraRecursiva.java
+├── EntradaInvalidaException.java
+├── Historico.java
+├── Main.java
+├── Pessoa.java
+├── PessoaBase.java
+├── SistemaIMC.java
 
