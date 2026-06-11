@@ -75,15 +75,15 @@ Serve como base para as demais classes do sistema.
 ```text
 src/main/java
 
-├── CalculadoraIMC.java
-├── PessoaBase.java
-├── Pessoa.java
-├── Atleta.java
-├── Historico.java
-├── SistemaIMC.java
-├── CalculadoraRecursiva.java
-├── EntradaInvalidaException.java
-└── Main.java
+Atleta.java
+CalculadoraIMC.java
+CalculadoraRecursiva.java
+EntradaInvalidaException
+Historico.java
+Main.java
+Pessoa.java
+PessoaBase.java
+SistemaIMC.java
 ```
 
 ---
