@@ -1,90 +1,77 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
-    // Scanner global
     static Scanner scanner = new Scanner(System.in);
 
-    // Métodos de leitura segura
+    // =========================
+    // LEITURA SEGURA DE DOUBLE
+    // =========================
     public static double lerDouble(String campo) {
-
         try {
-
-            double valor = scanner.nextDouble();
-            scanner.nextLine();
+            String entrada = scanner.nextLine().trim().replace(",", ".");
+            double valor = Double.parseDouble(entrada);
 
             if (valor <= 0) {
+                throw new EntradaInvalidaException(campo + " deve ser positivo!");
+            }
 
-                throw new EntradaInvalidaException(
-                        campo + " deve ser positivo!"
-                );
+            // validação de altura (evita 86, 175 etc.)
+            if (campo.equalsIgnoreCase("Altura") && valor > 3) {
+                throw new EntradaInvalidaException("Altura deve estar em metros (ex: 1.75)");
             }
 
             return valor;
 
-        } catch (InputMismatchException e) {
-
-            scanner.nextLine();
-
-            throw new EntradaInvalidaException(
-                    "Digite apenas números para " + campo
-            );
+        } catch (NumberFormatException e) {
+            throw new EntradaInvalidaException("Digite apenas números para " + campo);
         }
     }
 
+    // =========================
+    // LEITURA SEGURA DE INT
+    // =========================
     public static int lerInt(String campo) {
-
         try {
+            String entrada = scanner.nextLine().trim();
+            int valor = Integer.parseInt(entrada);
 
-            int valor = scanner.nextInt();
-            scanner.nextLine();
-
-            if (valor <= 0) {
-
-                throw new EntradaInvalidaException(
-                        campo + " deve ser positivo!"
-                );
+            if (valor < 0) {
+                throw new EntradaInvalidaException(campo + " deve ser positivo!");
             }
 
             return valor;
 
-        } catch (InputMismatchException e) {
-
-            scanner.nextLine();
-
-            throw new EntradaInvalidaException(
-                    "Digite apenas números inteiros para " + campo
-            );
+        } catch (NumberFormatException e) {
+            throw new EntradaInvalidaException("Digite apenas números inteiros para " + campo);
         }
     }
 
+    // =========================
+    // LEITURA DE STRING
+    // =========================
     public static String lerString(String campo) {
-
-        String valor = scanner.nextLine();
+        String valor = scanner.nextLine().trim();
 
         if (valor.isEmpty()) {
-
-            throw new EntradaInvalidaException(
-                    campo + " não pode ficar vazio!"
-            );
+            throw new EntradaInvalidaException(campo + " não pode ficar vazio!");
         }
 
         return valor;
     }
 
+    // =========================
+    // MAIN
+    // =========================
     public static void main(String[] args) {
 
         SistemaIMC sistema = new SistemaIMC();
-
         Pessoa pessoaAtual = null;
-
         boolean ativo = true;
 
         while (ativo) {
 
             try {
-
                 CalculadoraRecursiva.linha();
 
                 System.out.println("===== CALCULADORA IMC =====");
@@ -97,13 +84,11 @@ public class Main {
                 CalculadoraRecursiva.linha();
 
                 System.out.print("Escolha uma opção: ");
-
                 int opcao = lerInt("opção");
 
                 switch (opcao) {
 
                     case 1:
-
                         System.out.print("Nome: ");
                         String nome = lerString("Nome");
 
@@ -116,18 +101,12 @@ public class Main {
                         System.out.print("Altura: ");
                         double altura = lerDouble("Altura");
 
-                        pessoaAtual = new Pessoa(
-                                nome,
-                                idade,
-                                peso,
-                                altura
-                        );
+                        pessoaAtual = new Pessoa(nome, idade, peso, altura);
 
                         System.out.println("Pessoa cadastrada!");
                         break;
 
                     case 2:
-
                         System.out.print("Nome: ");
                         String nomeAtleta = lerString("Nome");
 
@@ -157,56 +136,37 @@ public class Main {
                     case 3:
 
                         if (pessoaAtual == null) {
-
-                            System.out.println(
-                                    "Nenhuma pessoa cadastrada!"
-                            );
-
+                            System.out.println("Nenhuma pessoa cadastrada!");
                             break;
                         }
 
-                        // Demonstração da recursão
                         double alturaQuadrado =
                                 CalculadoraRecursiva.potencia(
                                         pessoaAtual.getAltura(),
                                         2
                                 );
 
-                        System.out.println(
-                                "Altura ao quadrado: " +
-                                alturaQuadrado
-                        );
+                        System.out.println("Altura ao quadrado: " + alturaQuadrado);
 
                         sistema.processar(pessoaAtual);
-
                         break;
 
                     case 4:
-
                         sistema.exibirHistorico();
-
                         break;
 
                     case 0:
-
                         ativo = false;
-
                         System.out.println("Sistema encerrado!");
-
                         break;
 
                     default:
-
-                        throw new EntradaInvalidaException(
-                                "Opção inválida!"
-                        );
+                        throw new EntradaInvalidaException("Opção inválida!");
                 }
 
             } catch (EntradaInvalidaException e) {
-
-                System.out.println(
-                        "Erro: " + e.getMessage()
-                );
+                System.out.println("Erro: " + e.getMessage());
+                System.out.println("Tente novamente...\n");
             }
         }
 
